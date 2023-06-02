@@ -4,9 +4,7 @@ import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
-import org.cubeville.cvplayerdata.playerdata.PlayerDataDao;
-import org.cubeville.cvplayerdata.playerdata.PlayerDataManager;
-import org.cubeville.cvplayerdata.playerdata.ProfilesDao;
+import org.cubeville.cvplayerdata.playerdata.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -41,6 +39,7 @@ public class CVPlayerData extends Plugin {
         if(dbUser.length() > 0 && dbPassword.length() > 0 && dbDatabase.length() > 0) {
             PlayerDataDao playerDataDao = new PlayerDataDao(dbUser, dbPassword, dbDatabase);
             new ProfilesDao(dbUser, dbPassword, dbDatabase);
+            new NameRecordDao(dbUser, dbPassword, dbDatabase);
             playerDataManager = new PlayerDataManager(playerDataDao);
         } else {
             throw new RuntimeException("db_user, db_password, or db_database not set in config.yml!");
