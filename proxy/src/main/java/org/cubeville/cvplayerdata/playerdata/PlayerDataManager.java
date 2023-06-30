@@ -125,6 +125,13 @@ public class PlayerDataManager {
         return displayName;
     }
 
+    public UUID getPlayerByVisibleName(String visibleName) {
+        for(PlayerData pd : playerData.values()) {
+            if(pd.getDisplayName() != null && pd.getDisplayName().equalsIgnoreCase(visibleName)) return pd.getPlayerId();
+        }
+        return getPlayerId(visibleName);
+    }
+
     public List<String> getMatchingPlayerNames(List<String> search) {
         List<String> ret = new ArrayList<>();
         for(String name: playerNameMap.keySet()) {
